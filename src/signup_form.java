@@ -31,7 +31,7 @@ public class signup_form extends JFrame {
         input_signup_text.addKeyListener(signupListener);
         reenter1_signup_text.addKeyListener(signupListener1);
         reenter2_signup_text.addKeyListener(signupListener2);
-        //abceb
+        //abc
         status_signup_label.setText("");
 
         setMinimumSize(new Dimension(600, 300));
