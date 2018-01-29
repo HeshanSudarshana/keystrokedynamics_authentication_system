@@ -50,31 +50,39 @@ public class login_form extends JFrame {
                     status_login_label.setText("Do not enter backspaces while typing the password!");
                 } else if (userList.get(username_login_text.getText()) == null) {
                     loginListener.clearArrays();
+                    username_login_text.setText("");
                     input_login_text.setText("");
                     status_login_label.setText("Username does not exist!");
                 } else if(!(passwords.get((Integer) userList.get(username_login_text.getText()))).equals(input_login_text.getText())) {
-                    System.out.println(passwords.get((Integer) userList.get(username_login_text.getText())));
-                    System.out.println(input_login_text.getText());
                     loginListener.clearArrays();
                     input_login_text.setText("");
                     status_login_label.setText("Password mismatch!");
                 } else {
-                    loginPressingDifferences = loginListener.pressedDifferences();
-                    loginPressingDurations = loginListener.pressedDurations();
-                    Integer[] signupDiff = (Integer[]) pressingDifferences.get((Integer) userList.get(username_login_text.getText()));
-                    Integer[] signupDurations = (Integer[]) pressingDurations.get((Integer) userList.get(username_login_text.getText()));
-                    boolean auth = authenticator.authenticate(signupDiff, signupDurations, loginPressingDifferences, loginPressingDurations);
-                    if(auth) {
+                    try {
+                        loginPressingDifferences = loginListener.pressedDifferences();
+                        loginPressingDurations = loginListener.pressedDurations();
+                        Integer[] signupDiff = (Integer[]) pressingDifferences.get((Integer) userList.get(username_login_text.getText()));
+                        Integer[] signupDurations = (Integer[]) pressingDurations.get((Integer) userList.get(username_login_text.getText()));
+                        boolean auth = authenticator.authenticate(signupDiff, signupDurations, loginPressingDifferences, loginPressingDurations);
+                        showUserInfo(loginPressingDurations, loginPressingDifferences);
+                        if(auth) {
+                            username_login_text.setText("");
+                            input_login_text.setText("");
+                            loginListener.clearArrays();
+                            status_login_label.setText("User successfully authenticated!");
+                        } else {
+                            username_login_text.setText("");
+                            input_login_text.setText("");
+                            loginListener.clearArrays();
+                            status_login_label.setText("Access Denied!");
+                        }
+                    } catch (IndexOutOfBoundsException err) {
                         username_login_text.setText("");
                         input_login_text.setText("");
                         loginListener.clearArrays();
-                        status_login_label.setText("User successfully authenticated!");
-                    } else {
-                        username_login_text.setText("");
-                        input_login_text.setText("");
-                        loginListener.clearArrays();
-                        status_login_label.setText("Access Denied!");
+                        status_login_label.setText("Please Enter the details again!");
                     }
+
                 }
             }
         });
@@ -86,5 +94,23 @@ public class login_form extends JFrame {
                 loginListener.clearArrays();
             }
         });
+    }
+    public void showUserInfo(Integer[] durations, Integer[] differences) {
+        System.out.print("Key Pressed durations --> ");
+        for(int i=0; i<durations.length; i++) {
+            if(i!=durations.length-1) {
+                System.out.print(durations[i]+", ");
+            } else {
+                System.out.print(durations[i]+"\n");
+            }
+        }
+        System.out.print("Key Pressed differences --> ");
+        for(int i=0; i<differences.length; i++) {
+            if(i!=differences.length-1) {
+                System.out.print(differences[i]+", ");
+            } else {
+                System.out.print(differences[i]+"\n");
+            }
+        }
     }
 }

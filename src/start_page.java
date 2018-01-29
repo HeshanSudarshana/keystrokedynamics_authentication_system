@@ -22,7 +22,7 @@ public class start_page extends JFrame{
         setPasswords(new ArrayList<>());
         setUsers(new HashMap<>());
 
-        setMinimumSize(new Dimension(600, 200));
+        setMinimumSize(new Dimension(600, 500));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(main_panel);
         setLocation(250,250);

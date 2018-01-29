@@ -90,30 +90,40 @@ public class signup_form extends JFrame {
                     reenter2_signup_text.setText("");
                     status_signup_label.setText("Password mismatch!");
                 } else {
+                    try{
+                        avgPressingDifferences = avgTime(signupListener.pressedDifferences(), signupListener1.pressedDifferences(), signupListener2.pressedDifferences());
+                        avgPressingDurations = avgTime(signupListener.pressedDurations(), signupListener1.pressedDurations(), signupListener2.pressedDurations());
 
-                    avgPressingDifferences = avgTime(signupListener.pressedDifferences(), signupListener1.pressedDifferences(), signupListener2.pressedDifferences());
-                    avgPressingDurations = avgTime(signupListener.pressedDurations(), signupListener1.pressedDurations(), signupListener2.pressedDurations());
+                        userList.put(username_signup_text.getText(), userList.size());
+                        finalPressingDifferences.add(avgPressingDifferences);
+                        finalPressingDurations.add(avgPressingDurations);
+                        passwords.add(input_signup_text.getText());
 
-                    userList.put(username_signup_text.getText(), userList.size());
-                    finalPressingDifferences.add(avgPressingDifferences);
-                    finalPressingDurations.add(avgPressingDurations);
-                    passwords.add(input_signup_text.getText());
+                        System.out.println(signupListener.pressed_keys);
 
-                    System.out.println(signupListener.pressed_keys);
+                        showUserInfo(avgPressingDurations, avgPressingDifferences);
 
-                    showUserInfo(avgPressingDurations, avgPressingDifferences);
+                        status_signup_label.setText("User Successfully Registered to the system!");
+                        username_signup_text.setText("");
+                        input_signup_text.setText("");
+                        reenter1_signup_text.setText("");
+                        reenter2_signup_text.setText("");
+                        signupListener.clearArrays();
+                        signupListener1.clearArrays();
+                        signupListener2.clearArrays();
 
-                    status_signup_label.setText("User Successfully Registered to the system!");
-                    username_signup_text.setText("");
-                    input_signup_text.setText("");
-                    reenter1_signup_text.setText("");
-                    reenter2_signup_text.setText("");
-                    signupListener.clearArrays();
-                    signupListener1.clearArrays();
-                    signupListener2.clearArrays();
-
-                    System.out.println("Users list --> " + userList);
-                    System.out.println("Passwords --> " + passwords);
+                        System.out.println("Users list --> " + userList);
+                        System.out.println("Passwords --> " + passwords);
+                    } catch (IndexOutOfBoundsException err) {
+                        username_signup_text.setText("");
+                        input_signup_text.setText("");
+                        reenter1_signup_text.setText("");
+                        reenter2_signup_text.setText("");
+                        signupListener.clearArrays();
+                        signupListener1.clearArrays();
+                        signupListener2.clearArrays();
+                        status_signup_label.setText("Please Enter the details again!");
+                    }
 
                 }
             }

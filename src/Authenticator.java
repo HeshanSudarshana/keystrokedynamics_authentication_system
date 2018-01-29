@@ -23,6 +23,7 @@ public class Authenticator {
         } else {
             auth = false;
         }
+        System.out.println(marks/full_marks);
         return auth;
     }
 }
