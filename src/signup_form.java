@@ -1,11 +1,8 @@
-import oracle.jrockit.jfr.JFR;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class signup_form extends JFrame {
@@ -26,7 +23,7 @@ public class signup_form extends JFrame {
     private KeyPressListener signupListener2;
 
     private Integer[] avgPressingDurations;
-    private Integer[] avgPressingDiferences;
+    private Integer[] avgPressingDifferences;
 
     public signup_form(JFrame parent, HashMap userList, ArrayList finalPressingDifferences, ArrayList finalPressingDurations, ArrayList passwords) {
 
@@ -94,17 +91,17 @@ public class signup_form extends JFrame {
                     status_signup_label.setText("Password mismatch!");
                 } else {
 
-                    avgPressingDiferences = avgTime(signupListener.pressedDifferences(), signupListener1.pressedDifferences(), signupListener2.pressedDifferences());
+                    avgPressingDifferences = avgTime(signupListener.pressedDifferences(), signupListener1.pressedDifferences(), signupListener2.pressedDifferences());
                     avgPressingDurations = avgTime(signupListener.pressedDurations(), signupListener1.pressedDurations(), signupListener2.pressedDurations());
 
                     userList.put(username_signup_text.getText(), userList.size());
-                    finalPressingDifferences.add(avgPressingDiferences);
+                    finalPressingDifferences.add(avgPressingDifferences);
                     finalPressingDurations.add(avgPressingDurations);
                     passwords.add(input_signup_text.getText());
 
                     System.out.println(signupListener.pressed_keys);
 
-                    showUserInfo(avgPressingDurations, avgPressingDiferences);
+                    showUserInfo(avgPressingDurations, avgPressingDifferences);
 
                     status_signup_label.setText("User Successfully Registered to the system!");
                     username_signup_text.setText("");
@@ -169,12 +166,12 @@ public class signup_form extends JFrame {
         this.avgPressingDurations = avgPressingDurations;
     }
 
-    public Integer[] getAvgPressingDiferences() {
-        return avgPressingDiferences;
+    public Integer[] getAvgPressingDifferences() {
+        return avgPressingDifferences;
     }
 
-    public void setAvgPressingDiferences(Integer[] avgPressingDiferences) {
-        this.avgPressingDiferences = avgPressingDiferences;
+    public void setAvgPressingDifferences(Integer[] avgPressingDifferences) {
+        this.avgPressingDifferences = avgPressingDifferences;
     }
 }
 

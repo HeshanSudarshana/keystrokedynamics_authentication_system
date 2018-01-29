@@ -15,10 +15,14 @@ public class login_form extends JFrame {
     private JLabel status_login_label;
 
     KeyPressListener loginListener;
+    Authenticator authenticator;
+    private Integer[] loginPressingDifferences;
+    private Integer[] loginPressingDurations;
 
     public login_form(JFrame parent, HashMap userList, ArrayList pressingDifferences, ArrayList pressingDurations, ArrayList passwords) {
 
         loginListener = new KeyPressListener();
+        authenticator = new Authenticator();
         input_login_text.addKeyListener(loginListener);
         status_login_label.setText("");
 
@@ -48,19 +52,36 @@ public class login_form extends JFrame {
                     loginListener.clearArrays();
                     input_login_text.setText("");
                     status_login_label.setText("Username does not exist!");
-                } else if(passwords.get((Integer) userList.get(username_login_text.getText())) != (input_login_text.getText())) {
+                } else if(!(passwords.get((Integer) userList.get(username_login_text.getText()))).equals(input_login_text.getText())) {
+                    System.out.println(passwords.get((Integer) userList.get(username_login_text.getText())));
+                    System.out.println(input_login_text.getText());
                     loginListener.clearArrays();
                     input_login_text.setText("");
                     status_login_label.setText("Password mismatch!");
                 } else {
-
+                    loginPressingDifferences = loginListener.pressedDifferences();
+                    loginPressingDurations = loginListener.pressedDurations();
+                    Integer[] signupDiff = (Integer[]) pressingDifferences.get((Integer) userList.get(username_login_text.getText()));
+                    Integer[] signupDurations = (Integer[]) pressingDurations.get((Integer) userList.get(username_login_text.getText()));
+                    boolean auth = authenticator.authenticate(signupDiff, signupDurations, loginPressingDifferences, loginPressingDurations);
+                    if(auth) {
+                        username_login_text.setText("");
+                        input_login_text.setText("");
+                        loginListener.clearArrays();
+                        status_login_label.setText("User successfully authenticated!");
+                    } else {
+                        username_login_text.setText("");
+                        input_login_text.setText("");
+                        loginListener.clearArrays();
+                        status_login_label.setText("Access Denied!");
+                    }
                 }
             }
         });
         clearLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                input_login_text.setText("");
+                username_login_text.setText("");
                 input_login_text.setText("");
                 loginListener.clearArrays();
             }
