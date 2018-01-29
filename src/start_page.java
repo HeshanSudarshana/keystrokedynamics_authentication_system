@@ -9,24 +9,16 @@ public class start_page extends JFrame{
     private JButton loginButton;
     private JPanel main_panel;
 
-    private ArrayList <Integer[]> pressingDurations;
-    private ArrayList <Integer[]> pressingDifferences;
-    private ArrayList <Integer[]> pressingDurations1;
-    private ArrayList <Integer[]> pressingDifferences1;
-    private ArrayList <Integer[]> PressingDurations2;
-    private ArrayList <Integer[]> pressingDifferences2;
+    private ArrayList <Integer[]> finalPressingDurations;
+    private ArrayList <Integer[]> finalPressingDifferences;
 
     private ArrayList <String> passwords;
     private HashMap <String, Integer> users;
 
     public start_page() {
 
-        setPressingDifferences(new ArrayList<>());
-        setPressingDifferences1(new ArrayList<>());
-        setPressingDifferences2(new ArrayList<>());
-        setPressingDurations(new ArrayList<>());
-        setPressingDurations1(new ArrayList<>());
-        setPressingDurations2(new ArrayList<>());
+        setFinalPressingDifferences(new ArrayList<>());
+        setFinalPressingDurations(new ArrayList<>());
         setPasswords(new ArrayList<>());
         setUsers(new HashMap<>());
 
@@ -37,7 +29,7 @@ public class start_page extends JFrame{
         signUpButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                signup_form signup_page = new signup_form(getPreviousFrame(), getUsers(), getPressingDifferences(), getPressingDurations(), getPasswords());
+                signup_form signup_page = new signup_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords());
                 signup_page.setVisible(true);
                 signup_page.setAlwaysOnTop(true);
                 getPreviousFrame().setEnabled(false);
@@ -46,7 +38,7 @@ public class start_page extends JFrame{
         loginButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login_form login_page = new login_form(getPreviousFrame(), getUsers(), getPressingDifferences(), getPressingDurations(), getPasswords());
+                login_form login_page = new login_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords());
                 login_page.setVisible(true);
                 login_page.setAlwaysOnTop(true);
                 getPreviousFrame().setEnabled(false);
@@ -61,22 +53,6 @@ public class start_page extends JFrame{
         start_page_form.setVisible(true);
     }
 
-
-    public ArrayList<Integer[]> getPressingDurations() {
-        return pressingDurations;
-    }
-
-    public void setPressingDurations(ArrayList<Integer[]> pressingDurations) {
-        this.pressingDurations = pressingDurations;
-    }
-
-    public ArrayList<Integer[]> getPressingDifferences() {
-        return pressingDifferences;
-    }
-
-    public void setPressingDifferences(ArrayList<Integer[]> pressingDifferences) {
-        this.pressingDifferences = pressingDifferences;
-    }
 
     public ArrayList<String> getPasswords() {
         return passwords;
@@ -94,36 +70,20 @@ public class start_page extends JFrame{
         this.users = users;
     }
 
-    public ArrayList<Integer[]> getPressingDurations1() {
-        return pressingDurations1;
+    public ArrayList<Integer[]> getFinalPressingDurations() {
+        return finalPressingDurations;
     }
 
-    public void setPressingDurations1(ArrayList<Integer[]> pressingDurations1) {
-        this.pressingDurations1 = pressingDurations1;
+    public void setFinalPressingDurations(ArrayList<Integer[]> finalPressingDurations) {
+        this.finalPressingDurations = finalPressingDurations;
     }
 
-    public ArrayList<Integer[]> getPressingDifferences1() {
-        return pressingDifferences1;
+    public ArrayList<Integer[]> getFinalPressingDifferences() {
+        return finalPressingDifferences;
     }
 
-    public void setPressingDifferences1(ArrayList<Integer[]> pressingDifferences1) {
-        this.pressingDifferences1 = pressingDifferences1;
-    }
-
-    public ArrayList<Integer[]> getPressingDurations2() {
-        return PressingDurations2;
-    }
-
-    public void setPressingDurations2(ArrayList<Integer[]> pressingDurations2) {
-        PressingDurations2 = pressingDurations2;
-    }
-
-    public ArrayList<Integer[]> getPressingDifferences2() {
-        return pressingDifferences2;
-    }
-
-    public void setPressingDifferences2(ArrayList<Integer[]> pressingDifferences2) {
-        this.pressingDifferences2 = pressingDifferences2;
+    public void setFinalPressingDifferences(ArrayList<Integer[]> finalPressingDifferences) {
+        this.finalPressingDifferences = finalPressingDifferences;
     }
 }
 
