@@ -22,11 +22,15 @@ public class signup_form extends JFrame {
     private JLabel label2;
 
     private KeyPressListener signupListener;
+    private KeyPressListener signupListener1;
+    private KeyPressListener signupListener2;
 
     public signup_form(JFrame parent, HashMap userList, ArrayList pressingDifferences, ArrayList pressingDurations, ArrayList passwords) {
 
         signupListener = new KeyPressListener();
         input_signup_text.addKeyListener(signupListener);
+        reenter1_signup_text.addKeyListener(signupListener1);
+        reenter2_signup_text.addKeyListener(signupListener2);
         status_signup_label.setText("");
 
         setMinimumSize(new Dimension(600, 300));
