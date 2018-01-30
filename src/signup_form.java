@@ -35,7 +35,7 @@ public class signup_form extends JFrame {
         reenter2_signup_text.addKeyListener(signupListener2);
         status_signup_label.setText("");
 
-        setMinimumSize(new Dimension(600, 300));
+        setMinimumSize(new Dimension(500, 500));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(signup_panel);
         setLocation(100,100);

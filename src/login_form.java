@@ -26,7 +26,7 @@ public class login_form extends JFrame {
         input_login_text.addKeyListener(loginListener);
         status_login_label.setText("");
 
-        setMinimumSize(new Dimension(600, 300));
+        setMinimumSize(new Dimension(500, 500));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(login_panel);
         setLocation(150,150);
