@@ -4,7 +4,7 @@ public class Authenticator {
     }
     public boolean authenticate(Integer[] signupDiff, Integer[] signupDurations, Integer[] loginDiff, Integer[] loginDurations) {
         boolean auth = false;
-        int threshold = 30;
+        int threshold = 40;
         float marks = 0;
         float full_marks = loginDiff.length + loginDurations.length;
 

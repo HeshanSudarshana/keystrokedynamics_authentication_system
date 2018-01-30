@@ -12,6 +12,8 @@ public class start_page extends JFrame{
     private ArrayList <Integer[]> finalPressingDurations;
     private ArrayList <Integer[]> finalPressingDifferences;
 
+    private ArrayList <String> pressedKeys;
+    private ArrayList <String> releasedKeys;
     private ArrayList <String> passwords;
     private HashMap <String, Integer> users;
 
@@ -21,15 +23,17 @@ public class start_page extends JFrame{
         setFinalPressingDurations(new ArrayList<>());
         setPasswords(new ArrayList<>());
         setUsers(new HashMap<>());
+        setPressedKeys(new ArrayList<>());
+        setReleasedKeys(new ArrayList<>());
 
         setMinimumSize(new Dimension(600, 500));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(main_panel);
-        setLocation(250,250);
+        setLocation(100,100);
         signUpButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                signup_form signup_page = new signup_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords());
+                signup_form signup_page = new signup_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords(), getPressedKeys(), getReleasedKeys());
                 signup_page.setVisible(true);
                 signup_page.setAlwaysOnTop(true);
                 getPreviousFrame().setEnabled(false);
@@ -38,7 +42,7 @@ public class start_page extends JFrame{
         loginButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login_form login_page = new login_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords());
+                login_form login_page = new login_form(getPreviousFrame(), getUsers(), getFinalPressingDifferences(), getFinalPressingDurations(), getPasswords(), getPressedKeys(), getReleasedKeys());
                 login_page.setVisible(true);
                 login_page.setAlwaysOnTop(true);
                 getPreviousFrame().setEnabled(false);
@@ -84,6 +88,22 @@ public class start_page extends JFrame{
 
     public void setFinalPressingDifferences(ArrayList<Integer[]> finalPressingDifferences) {
         this.finalPressingDifferences = finalPressingDifferences;
+    }
+
+    public ArrayList<String> getPressedKeys() {
+        return pressedKeys;
+    }
+
+    public void setPressedKeys(ArrayList<String> pressedKeys) {
+        this.pressedKeys = pressedKeys;
+    }
+
+    public ArrayList<String> getReleasedKeys() {
+        return releasedKeys;
+    }
+
+    public void setReleasedKeys(ArrayList<String> releasedKeys) {
+        this.releasedKeys = releasedKeys;
     }
 }
 

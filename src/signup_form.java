@@ -25,7 +25,7 @@ public class signup_form extends JFrame {
     private Integer[] avgPressingDurations;
     private Integer[] avgPressingDifferences;
 
-    public signup_form(JFrame parent, HashMap userList, ArrayList finalPressingDifferences, ArrayList finalPressingDurations, ArrayList passwords) {
+    public signup_form(JFrame parent, HashMap userList, ArrayList finalPressingDifferences, ArrayList finalPressingDurations, ArrayList passwords, ArrayList pressedKeys, ArrayList releasedKeys) {
 
         signupListener = new KeyPressListener();
         signupListener1 = new KeyPressListener();
@@ -38,7 +38,7 @@ public class signup_form extends JFrame {
         setMinimumSize(new Dimension(600, 300));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(signup_panel);
-        setLocation(250,250);
+        setLocation(100,100);
         cancelSignupButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +67,14 @@ public class signup_form extends JFrame {
                     signupListener.clearArrays();
                     input_signup_text.setText("");
                     status_signup_label.setText("Do not enter backspaces while typing the text in the password!");
+                } else if(input_signup_text.getText().length()<8) {
+                    signupListener.clearArrays();
+                    signupListener1.clearArrays();
+                    signupListener2.clearArrays();
+                    input_signup_text.setText("");
+                    reenter1_signup_text.setText("");
+                    reenter2_signup_text.setText("");
+                    status_signup_label.setText("Password must contain at least 8 characters!");
                 } else if (signupListener1.getStr_pressed_keys().contains("Backspace")) {
                     signupListener1.clearArrays();
                     reenter1_signup_text.setText("");
@@ -89,6 +97,25 @@ public class signup_form extends JFrame {
                     reenter1_signup_text.setText("");
                     reenter2_signup_text.setText("");
                     status_signup_label.setText("Password mismatch!");
+                } else if(!signupListener.getStr_pressed_keys().equals(signupListener1.getStr_pressed_keys()) || !signupListener.getStr_pressed_keys().equals(signupListener2.getStr_pressed_keys())) {
+                    System.out.println(signupListener.getStr_pressed_keys());
+                    System.out.println(signupListener1.getStr_pressed_keys());
+                    System.out.println(signupListener2.getStr_pressed_keys());
+                    signupListener.clearArrays();
+                    signupListener1.clearArrays();
+                    signupListener2.clearArrays();
+                    input_signup_text.setText("");
+                    reenter1_signup_text.setText("");
+                    reenter2_signup_text.setText("");
+                    status_signup_label.setText("Pressed key Pattern mismatch!");
+                } else if(!signupListener.getStr_released_keys().equals(signupListener1.getStr_released_keys()) || !signupListener.getStr_released_keys().equals(signupListener2.getStr_released_keys())) {
+                    signupListener.clearArrays();
+                    signupListener1.clearArrays();
+                    signupListener2.clearArrays();
+                    input_signup_text.setText("");
+                    reenter1_signup_text.setText("");
+                    reenter2_signup_text.setText("");
+                    status_signup_label.setText("Released key Pattern mismatch!");
                 } else {
                     try{
                         avgPressingDifferences = avgTime(signupListener.pressedDifferences(), signupListener1.pressedDifferences(), signupListener2.pressedDifferences());
@@ -98,6 +125,8 @@ public class signup_form extends JFrame {
                         finalPressingDifferences.add(avgPressingDifferences);
                         finalPressingDurations.add(avgPressingDurations);
                         passwords.add(input_signup_text.getText());
+                        pressedKeys.add(signupListener.getStr_pressed_keys());
+                        releasedKeys.add(signupListener.getStr_released_keys());
 
                         System.out.println(signupListener.pressed_keys);
 
@@ -114,6 +143,10 @@ public class signup_form extends JFrame {
 
                         System.out.println("Users list --> " + userList);
                         System.out.println("Passwords --> " + passwords);
+                        JOptionPane.showMessageDialog(parent, "User successfully registered!");
+                        dispose();
+                        parent.setEnabled(true);
+
                     } catch (IndexOutOfBoundsException err) {
                         username_signup_text.setText("");
                         input_signup_text.setText("");

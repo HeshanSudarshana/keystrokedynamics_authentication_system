@@ -9,9 +9,6 @@ public class KeyPressListener implements KeyListener {
     ArrayList <String> pressed_keys;
     ArrayList <String> released_keys;
 
-    String str_pressed_keys = "";
-    String str_released_keys = "";
-
     public KeyPressListener() {
         pressed_time = new ArrayList();
         released_time = new ArrayList();
@@ -84,27 +81,29 @@ public class KeyPressListener implements KeyListener {
     //String of user pressed keys
 
     public String getStr_pressed_keys() {
+        String temp = "";
         for(int i = 0; i<pressed_keys.size(); i++) {
             if (i != pressed_keys.size() - 1) {
-                str_pressed_keys += pressed_keys.get(i) + " ";
+                temp += pressed_keys.get(i) + " ";
             } else {
-                str_pressed_keys += pressed_keys.get(i);
+                temp += pressed_keys.get(i);
             }
         }
-        return str_pressed_keys;
+        return temp;
     }
 
     //String of user released keys
 
     public String getStr_released_keys() {
+        String temp = "";
         for(int i = 0; i<released_keys.size(); i++) {
             if (i != released_keys.size() - 1) {
-                str_released_keys += released_keys.get(i) + " ";
+                temp += released_keys.get(i) + " ";
             } else {
-                str_released_keys += released_keys.get(i);
+                temp += released_keys.get(i);
             }
         }
-        return str_released_keys;
+        return temp;
     }
 
     public void clearArrays() {
@@ -112,8 +111,6 @@ public class KeyPressListener implements KeyListener {
         released_time.clear();
         pressed_keys.clear();
         released_keys.clear();
-        str_pressed_keys = "";
-        str_released_keys = "";
     }
 
 }

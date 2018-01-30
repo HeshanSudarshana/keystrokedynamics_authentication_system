@@ -19,7 +19,7 @@ public class login_form extends JFrame {
     private Integer[] loginPressingDifferences;
     private Integer[] loginPressingDurations;
 
-    public login_form(JFrame parent, HashMap userList, ArrayList pressingDifferences, ArrayList pressingDurations, ArrayList passwords) {
+    public login_form(JFrame parent, HashMap userList, ArrayList pressingDifferences, ArrayList pressingDurations, ArrayList passwords, ArrayList pressedKeys, ArrayList releasedKeys) {
 
         loginListener = new KeyPressListener();
         authenticator = new Authenticator();
@@ -29,7 +29,7 @@ public class login_form extends JFrame {
         setMinimumSize(new Dimension(600, 300));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(login_panel);
-        setLocation(250,250);
+        setLocation(150,150);
         cancelLoginButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,7 +37,7 @@ public class login_form extends JFrame {
                 parent.setEnabled(true);
             }
         });
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ButtonClickListener(this) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (username_login_text.getText().isEmpty() || input_login_text.getText().isEmpty()) {
@@ -57,6 +57,14 @@ public class login_form extends JFrame {
                     loginListener.clearArrays();
                     input_login_text.setText("");
                     status_login_label.setText("Password mismatch!");
+                } else if(!loginListener.getStr_pressed_keys().equals(pressedKeys.get((Integer) userList.get(username_login_text.getText())))) {
+                    loginListener.clearArrays();
+                    input_login_text.setText("");
+                    status_login_label.setText("Access denied! Pressed pattern mismatch");
+                } else if(!loginListener.getStr_released_keys().equals(releasedKeys.get((Integer) userList.get(username_login_text.getText())))) {
+                    loginListener.clearArrays();
+                    input_login_text.setText("");
+                    status_login_label.setText("Access denied! Released pattern mismatch");
                 } else {
                     try {
                         loginPressingDifferences = loginListener.pressedDifferences();
@@ -70,6 +78,9 @@ public class login_form extends JFrame {
                             input_login_text.setText("");
                             loginListener.clearArrays();
                             status_login_label.setText("User successfully authenticated!");
+                            JOptionPane.showMessageDialog(parent, "User successfully authenticated!");
+                            dispose();
+                            parent.setEnabled(true);
                         } else {
                             username_login_text.setText("");
                             input_login_text.setText("");
@@ -96,7 +107,7 @@ public class login_form extends JFrame {
         });
     }
     public void showUserInfo(Integer[] durations, Integer[] differences) {
-        System.out.print("Key Pressed durations --> ");
+        System.out.print("Key Pressed durations(login) --> ");
         for(int i=0; i<durations.length; i++) {
             if(i!=durations.length-1) {
                 System.out.print(durations[i]+", ");
@@ -104,7 +115,7 @@ public class login_form extends JFrame {
                 System.out.print(durations[i]+"\n");
             }
         }
-        System.out.print("Key Pressed differences --> ");
+        System.out.print("Key Pressed differences(login) --> ");
         for(int i=0; i<differences.length; i++) {
             if(i!=differences.length-1) {
                 System.out.print(differences[i]+", ");

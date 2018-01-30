@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="keystroke_auth_cmd:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/keystroke_auth_cmd_jar</output-path>
+    <root id="archive" name="keystroke_auth_cmd.jar">
+      <element id="module-output" name="keystroke_auth_cmd" />
+    </root>
+  </artifact>
+</component>
