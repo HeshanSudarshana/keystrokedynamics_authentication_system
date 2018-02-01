@@ -52,7 +52,11 @@ public class start_page extends JFrame{
 
     //main method
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        for (UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()) {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
         start_page start_page_form = new start_page();
         start_page_form.setVisible(true);
     }
